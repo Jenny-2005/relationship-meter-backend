@@ -1,20 +1,14 @@
-import WebSocket, { WebSocketServer } from "ws";
+import { WebSocketServer } from "ws";
 import { GameManager } from "./GameManager.js";
 
-try {
-  const wss = new WebSocketServer({ port: 8080 });
-  const manager = new GameManager();
+const PORT = process.env.PORT || 8080;
 
-  console.log("✅ WebSocket server running on ws://localhost:8080");
+const wss = new WebSocketServer({ port: Number(PORT) });
+const manager = new GameManager();
 
-  wss.on("connection", (socket) => {
-    console.log("🔗 New client connected");
-    manager.addUser(socket);
+console.log(`✅ WebSocket server running on port ${PORT}`);
 
-    socket.on("close", () => console.log("❌ Client disconnected"));
-  });
-
-} catch (err) {
-  console.error("🔥 SERVER CRASHED:");
-  console.error(err);
-}
+wss.on("connection", (socket) => {
+  console.log("🔗 Client connected");
+  manager.addUser(socket);
+});

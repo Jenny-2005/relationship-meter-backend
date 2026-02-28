@@ -2,10 +2,11 @@ import { WebSocketServer } from "ws";
 import { GameManager } from "./GameManager.js";
 import { getDB } from "./db.js";
 
-getDB().catch(err => {
-  console.error("MongoDB connection error:", err);
-});
 const PORT = process.env.PORT || 8080;
+
+getDB()
+  .then(() => console.log("MongoDB connected"))
+  .catch((err) => console.error("MongoDB connection error:", err));
 
 const wss = new WebSocketServer({ port: Number(PORT) });
 const manager = new GameManager();

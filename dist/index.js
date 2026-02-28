@@ -8,6 +8,13 @@ getDB()
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
+console.log("Before DB connect");
+getDB()
+  .then(() => console.log("MongoDB connected"))
+  .catch((err) => console.error("MongoDB connection error:", err));
+
+console.log("After DB connect call");
+
 const wss = new WebSocketServer({ port: Number(PORT) });
 const manager = new GameManager();
 

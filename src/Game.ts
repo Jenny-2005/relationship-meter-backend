@@ -63,7 +63,7 @@ export class Game {
     ]);
 
     this.answers = new Map();
-    this.distance = 1;
+    this.distance = 0;
 
     this.sessionId = randomUUID();
     this.startTime = new Date();
